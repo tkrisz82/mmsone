@@ -10,6 +10,7 @@ import tkrisz82.rentacar.db.CarDB;
 import tkrisz82.rentacar.db.UserDB;
 
 import tkrisz82.rentacar.model.User;
+import tkrisz82.rentacar.services.PwdHandler;
 
 @Controller
 public class LoginAndRegController {
@@ -35,13 +36,17 @@ public class LoginAndRegController {
 	@PostMapping("/reg")
 	public String registration(Model model, @RequestParam(name = "name") String name,
 			@RequestParam(name = "email") String email, @RequestParam(name = "pwd") String pwd) {
-
+		
+		PwdHandler ph = new PwdHandler();
+		
+		String hashedpwd = ph.hashPassword(pwd);
+		
 		User user = new User();
 
 		user.setId(0);
 		user.setName(name);
 		user.setEmail(email);
-		user.setPwd(pwd);
+		user.setPwd(hashedpwd);
 		user.setLogedin(0);
 		user.setType("user");
 
@@ -56,14 +61,18 @@ public class LoginAndRegController {
 	public String login(Model model, @RequestParam(name = "email") String email, @RequestParam(name = "pwd") String pwd
 
 	) {
-
+		
+		PwdHandler ph = new PwdHandler();
+		
 		String html = "";
 
 		UserDB udb = new UserDB();
 		
 		CarDB cdb = new CarDB();
+		
+		String hashedPwd = ph.hashPassword(pwd);
 
-		User user = udb.getUserByEmailAndPwd(email, pwd);
+		User user = udb.getUserByEmailAndPwd(email, hashedPwd);
 
 		if (user == null) {
 

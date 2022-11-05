@@ -82,7 +82,7 @@ public class User {
 		this.type = type;
 	}
 
-	@Override
+	
 	public String toString() {
 		return "User [id=" + id + ", name=" + name + ", email=" + email + ", pwd=" + pwd + ", logedin=" + logedin
 				+ ", type=" + type + "]";
