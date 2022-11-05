@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<style>
+
+	header{
+		margin-right: 0%;
+		text-align: right;
+	}
+	table, th, td {
+  		border: 1px solid;
+  		text-align: center;
+	}
+
+
+
+</style>
+
+
+</head>
+<body>
+
+	<header>
+
+	<form method = "post" action = "/logout">
+		<input type="hidden" name="userid" th:value="${user.id}">
+		<input type = "submit" value = "Logout"/>
+	
+	</form>
+
+	</header>
+	
+	<div>
+	
+		<h1 th:text=" 'Üdvözöllek ' + ${user.name} "></h1>
+	
+	</div>
+
+	<div>
+
+		<table>
+	
+			<th>Azonosító</th>
+			<th>Modell</th>
+			<th>Rendszám</th>
+			<th>Napi díj</th>
+		
+			<tr th:each="car: ${carList}">
+				
+				<td th:text="${car.id}"></td>
+				<td th:text="${car.model}"></td>
+				<td th:text="${car.plate}"></td>
+				<td th:text="${car.price}"></td>
+				
+		
+			</tr>
+		
+		</table>
+
+	</div>
+
+	<div>
+	
+	Foglalás <br>
+	<br>
+	
+		<form action = "/rent" method = "post">
+			<input type="hidden" name="userid" th:value="${user.id}">
+			Kezdés napja:
+			<input type = "date" name = "start"/>
+			Leadás napja:
+			<input type = "date" name = "end"/>
+			Választható autók:	
+		
+			
+			<select  name = "carid">
+					<option th:each= "car : ${carList}" th:value="${car.id}" th:text="${car.id} + ' ' + ${car.model} + ' ' + ${car.plate}"></option>
+			</select><br>
+			
+		
+			Komment:<br>
+			<textarea name = "comment" rows="4" cols="50"></textarea>
+			<input type = "submit" value = "Foglalás"/>
+		
+		</form>
+		
+		<p th:text = "${succsess}"></p>
+		<p th:text = " 'A foglalás ára: ' + ${price}"></p>
+	
+	</div>
+
+	<div>
+	
+		Kárbejelentés:
+		
+		<form action= "/damage" method = "post">
+			<input type="hidden" name="userid" th:value="${user.id}">
+			Adja meg a sérült autó rendszámát(AAA-123):
+			<input type = "text" name = "plate"/>
+			<input type = "submit" value = "Bejelentés">
+		</form>
+		<p th:text="${damage}"></p>
+	</div>
+	
+	<div>
+	
+		Javítás bejelentése:
+		
+		<form action= "/repaired" method = "post">
+			<input type="hidden" name="userid" th:value="${user.id}">
+			Adja meg a javított autó rendszámát(AAA-123):
+			<input type = "text" name = "plate"/>
+			<input type = "submit" value = "Bejelentés">
+		</form>
+		<p th:text="${repaired}"></p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+</body>
+</html>

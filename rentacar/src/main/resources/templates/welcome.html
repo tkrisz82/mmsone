@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<style>
+
+h1{
+	text-align : center;
+}
+
+.container{
+	
+  width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  justify-content: space-between;
+	
+}
+#reg{
+	width: 50%;
+	text-align : center;
+	height : 200px;
+}
+#log{
+	width: 50%;
+	text-align : center;
+}
+
+.button{
+	font-size: 40px;
+}
+
+</style>
+
+
+</head>
+<body>
+
+	<h1>Üdvözöllek oldalunkon! Autó bérléshez kérlék lépj be, vagy ha még nem vagy tagunk, regisztrálj!<h1>
+
+
+	<div class="container">
+
+	<div id = "reg">
+
+		<form class = "form" method="get" action="/registration">
+			<input class = "button" type="submit" value="Reg"/>
+		
+		
+		</form>
+	</div>
+	<div id = "log">	
+		<form class = "form" method="get" action="/login">
+		
+			<input class = "button" type="submit" value="Log in"/>	
+		
+		</form>
+	</div>
+</div>
+
+</body>
+</html>
