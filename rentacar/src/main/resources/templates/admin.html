@@ -5,156 +5,198 @@
 <title>Insert title here</title>
 <style>
 
-	header{
+body{
+  background-color: #008080;
+  box-sizing: border-box;
+}
+h2{
+  padding-top: 40px;
+  margin-bottom: 0px;
+	text-align : center;
+}
+h4{
+  margin-top: 0px;
+	text-align : center;
+	margin-bottom: 0px;
+}
+
+.container{
+	
+  width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: lightgrey;
+  height: 1500px;
+  box-shadow: 0px 0px 7px 2px black;
+}	
+header{
 		margin-right: 0%;
 		text-align: right;
 	}
 	table, th, td {
-  		border: 1px solid;
-  		text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+  	border: 1px solid;
+  	text-align: center;
 	}
-
+.report{
+  margin-left: auto;
+    margin-right: auto;
+}
+.middle{
+  margin-left: 230px;
+    
+}
+.middlebutton{
+	margin-left: 280px;
+}
+.red{
+  color: red
+}
+#cs{
+	margin-left: 210px;
+}
 
 </style>
 
 </head>
 <body>
 
-<header>
+<div class = "container">
+  <header>
 
-	<form method = "post" action = "/logout">
-		<input type="hidden" name="userid" th:value="${user.id}">
-		<input type = "submit" value = "Logout"/>
-	
-	</form>
+    <form method = "post" action = "/logout">
+      <input type="hidden" name="userid" th:value="${user.id}">
+      <input type = "submit" value = "Logout"/>
 
-
-
-</header>
+    </form>
 
 
-<p th:text=" 'Üdvözöllek ' + ${user.name}"></p>
+
+  </header>
 
 
-<div>
+  <h2 class = "red" th:text=" 'Üdvözöllek ' + ${user.name}"></h2><br>
 
-	Az összes autó:
-	<table>
-	
-			<th>Azonosító</th>
-			<th>Modell</th>
-			<th>Rendszám</th>
-			<th>Napi díj</th>
-		
-			<tr th:each="car: ${allCars}">
-				
-				<td th:text="${car.id}"></td>
-				<td th:text="${car.model}"></td>
-				<td th:text="${car.plate}"></td>
-				<td th:text="${car.price}"></td>
-				
-		
-			</tr>
-		
-		</table>
-</div>
-<br>
-<div>
 
-	A törött autók:
-	<table>
-	
-			<th>Azonosító</th>
-			<th>Modell</th>
-			<th>Rendszám</th>
-			<th>Napi díj</th>
-		
-			<tr th:each="car: ${brokenCars}">
-				
-				<td th:text="${car.id}"></td>
-				<td th:text="${car.model}"></td>
-				<td th:text="${car.plate}"></td>
-				<td th:text="${car.price}"></td>
-				
-		
-			</tr>
-		
-		</table>
-</div>
+  <div class = "allcars">
 
-<br>
+    <h4>Az összes autó:<h4>
+    <table>
 
-<div>
-	autó regisztrálás:
-	
-	<form method = "post" action = "addnewcar">
-		<input type="hidden" name="userid" th:value="${user.id}">
-		Modell:
-		<input type = "text" name = "model"/>
-		Rendszám:
-		<input type = "text" name = "plate"/>
-		Napi díj:
-		<input type = "number" name = "price"/>
-		<input type = "submit" />
-	
-	</form><br>
-	<p th:text="${registration}"></p>
-	
-	Autó törlés:
-	
-	<form method = "post" action = "deletecar">
-		<input type="hidden" name="userid" th:value="${user.id}">
-		
-		Kérem adja meg a rendszámot:
-		<input type = "text" name = "plate"/>
-		<input type = "submit" />
-	
-	</form><br>
-	<p th:text="${delete}"></p>
-	
-	kikölcsönzött autók:
-	
-	
-	
-</div>
+        <th>Azonosító</th>
+        <th>Modell</th>
+        <th>Rendszám</th>
+        <th>Napi díj</th>
 
-<div>
-	
-	
-	
-	<form action = "/report" method = "post">
+        <tr th:each="car: ${allCars}">
+
+          <td th:text="${car.id}"></td>
+          <td th:text="${car.model}"></td>
+          <td th:text="${car.plate}"></td>
+          <td th:text="${car.price}"></td>
+
+
+        </tr>
+
+      </table>
+  </div>
+  <br>
+  <div class = "brokencars">
+
+    <h4>Törött autók:<h4>
+    <table>
+
+        <th>Azonosító</th>
+        <th>Modell</th>
+        <th>Rendszám</th>
+        <th>Napi díj</th>
+
+        <tr th:each="car: ${brokenCars}">
+
+          <td th:text="${car.id}"></td>
+          <td th:text="${car.model}"></td>
+          <td th:text="${car.plate}"></td>
+          <td th:text="${car.price}"></td>
+
+
+        </tr>
+
+      </table>
+  </div>
+
+  <br>
+
+  <div class = "newcar">
+    <h4 class = "red">ÚJ AUTÓ REGISZTRÁLÁS:<h4>
+
+    <form method = "post" action = "addnewcar">
+      <input type="hidden" name="userid" th:value="${user.id}">
+      Modell:<br>
+      <input type = "text" name = "model"/><br>
+      Rendszám:<br>
+      <input type = "text" name = "plate"/><br>
+      Napi díj:<br>
+      <input type = "number" name = "price"/><br>
+      <input type = "submit" value = "Regisztráció"/>
+
+    </form><br>
+    <p th:text="${registration}"></p>
+  </div>
+      
+  <div class = "deletecar">     
+    <h4 class = "red">AUTÓ TÖRLÉS AZ ADATBÁZISBÓL:<h4>
+
+    <form method = "post" action = "deletecar">
+      <input type="hidden" name="userid" th:value="${user.id}">
+
+      <h4>Kérem adja meg a rendszámot:<h4>
+      <input type = "text" name = "plate"/><br>
+      <input type = "submit" value = "Törlés" />
+
+    </form><br>
+    <p th:text="${delete}"></p>
+  </div>
+  <div class = "report">
+    
+    <h4 class = "red">RIPORTOK</h4>
+    
+    <form action = "/report" method = "post">
 			<input type="hidden" name="userid" th:value="${user.id}">
-			Kezdő dátum:
-			<input type = "date" name = "start"/>
-			Záró dátum:
-			<input type = "date" name = "end"/>
+			<h4>Kezdő dátum:</h4><br>
+			<input class = "middle" type = "date" name = "start"/><br>
+			<h4>Vég dátum:</h4><br>
+			<input class = "middle" type = "date" name = "end"/><br>
 				
-		
-			<select  name = "carid">
+			<h4>Autó:</h4><br>
+			<select id= "cs" class = "middle" name = "carid">
 					<option th:value = "0" th:text = "összes"></option>
 					<option th:each= "car : ${allCars}" th:value="${car.id}" th:text="${car.id} + ' ' + ${car.model} + ' ' + ${car.plate}"></option>
 			</select><br>
 			
 			
-		
 			
-			<input type = "submit" value = "Riport"/>
+			
+			<input class = "middlebutton" type = "submit" value = "Riport"/>
 		
 	</form>
 
 
 
-</div>
-<div>
+  
 
-	Riport:<br>
+  </div>
+    
+   <div>
+
+
 	
-	<p th:text="${reportedcar}"></p>
+	<h4 th:text="${reportedcar}"></h4>
 	<table>
 	
-			<th>Azonosító</th>
-			<th>Kezdő</th>
-			<th>Záró</th>
+			<th>Bérlés azonosító</th>
+			<th>Bérlés kezdete</th>
+			<th>Bérlés vége</th>
 			<th>Autó azonosító</th>
 		
 			<tr th:each="rent: ${reportCars}">
@@ -168,9 +210,10 @@
 			</tr>
 		
 		</table>
-</div>
-
-
+</div> 
+    
+</div>    
+    
 
 </body>
 </html>

@@ -6,22 +6,59 @@
 
 <style>
 
-	header{
+body{
+  background-color: #008080;
+  box-sizing: border-box;
+}
+h2{
+  padding-top: 40px;
+  margin-bottom: 0px;
+	text-align : center;
+}
+h4{
+  margin-top: 0px;
+	text-align : center;
+  
+}
+
+.container{
+	
+  width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: lightgrey;
+  height: 1500px;
+  box-shadow: 0px 0px 7px 2px black;
+}	
+header{
 		margin-right: 0%;
 		text-align: right;
 	}
 	table, th, td {
-  		border: 1px solid;
-  		text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+  	border: 1px solid;
+  	text-align: center;
 	}
 
 
+.red{
+  color: red
+}
+.middle{
+  margin-left: 210px;
+    
+}
+.middlebutton{
+  margin-left: 260px;
+}
 
 </style>
 
 
 </head>
 <body>
+<div class = "container">
 
 	<header>
 
@@ -33,14 +70,15 @@
 
 	</header>
 	
-	<div>
 	
-		<h1 th:text=" 'Üdvözöllek ' + ${user.name} "></h1>
 	
-	</div>
-
-	<div>
-
+		<h2 class = "red" th:text=" 'Üdvözöllek ' + ${user.name} "></h2>
+    <br>
+	
+	
+  <div>
+	
+    <h4>Jelenleg választható autóink:</h4>
 		<table>
 	
 			<th>Azonosító</th>
@@ -61,19 +99,20 @@
 		</table>
 
 	</div>
-
+  
+  
 	<div>
 	
-	Foglalás <br>
+	<h2 class = "red">FOGLALÁS</h2> <br>
 	<br>
 	
 		<form action = "/rent" method = "post">
 			<input type="hidden" name="userid" th:value="${user.id}">
-			Kezdés napja:
+			<h4>Kezdés napja:<h4>
 			<input type = "date" name = "start"/>
-			Leadás napja:
+			<h4>Leadás napja:<h4>
 			<input type = "date" name = "end"/>
-			Választható autók:	
+			<h4>Választható autók:<h4>	
 		
 			
 			<select  name = "carid">
@@ -81,45 +120,45 @@
 			</select><br>
 			
 		
-			Komment:<br>
-			<textarea name = "comment" rows="4" cols="50"></textarea>
+			<h4>Komment:<h4><br>
+			<textarea name = "comment" rows="4" cols="50"></textarea><br>
 			<input type = "submit" value = "Foglalás"/>
 		
 		</form>
 		
-		<p th:text = "${succsess}"></p>
-		<p th:text = " 'A foglalás ára: ' + ${price}"></p>
+		<h2 class = "red" th:text = "${succsess}"></h2>
+		<h4 class = "red" th:text = " 'A foglalás ára: ' + ${price} + 'Ft'"></h4>
 	
 	</div>
-
-	<div>
+  <div>
 	
-		Kárbejelentés:
+		<h4 class = "red">KÁRBEJELENTÉS:</h4>
 		
 		<form action= "/damage" method = "post">
 			<input type="hidden" name="userid" th:value="${user.id}">
-			Adja meg a sérült autó rendszámát(AAA-123):
-			<input type = "text" name = "plate"/>
-			<input type = "submit" value = "Bejelentés">
+			<h4>Adja meg a sérült autó rendszámát(AAA-123):</h4>
+			<input class="middle" type = "text" name = "plate"/><br>
+			<input class="middlebutton" type = "submit" value = "Bejelentés">
 		</form>
-		<p th:text="${damage}"></p>
-	</div>
+		<h4 th:text="${damage}"></h4>
 	
+	</div>
 	<div>
 	
-		Javítás bejelentése:
+		<h4 class = "red">JAVÍTÁS BEJELENTÉSE:</h4>
 		
 		<form action= "/repaired" method = "post">
-			<input type="hidden" name="userid" th:value="${user.id}">
-			Adja meg a javított autó rendszámát(AAA-123):
-			<input type = "text" name = "plate"/>
-			<input type = "submit" value = "Bejelentés">
+			<input type="hidden" name="userid" th:value="${user.id}"><br>
+			<h4>Adja meg a javított autó rendszámát(AAA-123):</h4>
+			<input class="middle" type = "text" name = "plate"/><br>
+			<input class="middlebutton" type = "submit" value = "Bejelentés">
 		</form>
-		<p th:text="${repaired}"></p>
-	</div>
+		<h4 th:text="${repaired}"></h4>
+	
+    </div>
 	
 	
-	
+</div>	
 	
 	
 	
