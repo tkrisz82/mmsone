@@ -153,6 +153,21 @@ public class RentDB {
 		ta.commit();
 		session.close();
 	}
+	
+	public void deleteRentByrentId(int rentId) {
+		
+		Session session = sessionFactory.openSession();
+		Transaction ta = session.beginTransaction();
+
+		Query query = session.createQuery("DELETE FROM Rent r WHERE r.id = :rentid");
+		query.setParameter("rentid", rentId);
+		query.executeUpdate();
+
+		ta.commit();
+		session.close();
+	}
+	
+	
 
 	public void close() {
 		sessionFactory.close();

@@ -17,7 +17,9 @@ import tkrisz82.rentacar.model.User;
 
 @Controller
 public class AdminController {
-
+	
+	
+	// ÚJ AUTÓ HOZZÁADÁSA
 	@PostMapping("/addnewcar")
 	public String addNewCar(Model model, @RequestParam(name = "model") String mod,
 											@RequestParam(name = "plate") String plate,
@@ -45,7 +47,7 @@ public class AdminController {
 		return "admin.html";
 	}
 	
-	
+	// AUTÓ TÖRLÉSE
 	@PostMapping("/deletecar")
 	public String deleteCar(Model model, @RequestParam(name = "plate") String plate,
 											@RequestParam(name = "userid") int userId) {
@@ -77,6 +79,32 @@ public class AdminController {
 		return "admin.html";
 	}
 	
+	
+	// FOGLALÁS TÖRLÉSE
+	@PostMapping("/deleterent")
+	public String deleterent(Model model, @RequestParam(name = "userid") int userId, 
+											@RequestParam(name = "rentid") int rentId) {
+		RentDB rdb = new RentDB();
+		
+		UserDB udb = new UserDB();
+		
+		CarDB cdb = new CarDB();
+		
+		rdb.deleteRentByrentId(rentId);
+		
+		model.addAttribute("user", udb.getUserById(userId));
+		
+		model.addAttribute("allCars", cdb.getAllCars());
+		
+		model.addAttribute("brokenCars", cdb.getAllBrokenCars());
+		
+		model.addAttribute("deleterent", "Sikeres törlés!");
+		
+		return "admin.html";
+	}
+	
+	
+	// RIPORT
 	@PostMapping("/report")
 	public String report(Model model, @RequestParam(name = "userid") int userId,
 										@RequestParam(name = "start") Date start,

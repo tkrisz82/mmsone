@@ -14,25 +14,31 @@ import tkrisz82.rentacar.services.PwdHandler;
 
 @Controller
 public class LoginAndRegController {
-
+	
+	
+	// KEZDÉS
 	@GetMapping("/rentacar")
 	public String welcomePage() {
 
 		return "welcome.html";
 	}
 
+	// REGISZTRÁCIÓRA UGRÁS
 	@GetMapping("/registration")
 	public String goToRegistration() {
 
 		return "registration.html";
 	}
 
+	// BEJELENTKEZÉSRE UGRÁS
 	@GetMapping("/login")
 	public String goToLogin() {
 
 		return "login.html";
 	}
 
+	
+	// REGISZTRÁCIÓ
 	@PostMapping("/reg")
 	public String registration(Model model, @RequestParam(name = "name") String name,
 			@RequestParam(name = "email") String email, @RequestParam(name = "pwd") String pwd) {
@@ -56,7 +62,9 @@ public class LoginAndRegController {
 
 		return "login.html";
 	}
-
+	
+	
+	// BEJELENTKEZÉS
 	@PostMapping("/login")
 	public String login(Model model, @RequestParam(name = "email") String email, @RequestParam(name = "pwd") String pwd
 
@@ -74,14 +82,14 @@ public class LoginAndRegController {
 
 		User user = udb.getUserByEmailAndPwd(email, hashedPwd);
 
-		if (user == null) {
+		if (user == null) { // Stimmel-e az email és a jelszó. Itt nem.
 
 			html = "login.html";
 
 			model.addAttribute("feedback", "Rossz email, vagy jelszó!");
-		} else {
+		} else { // Stimmel-e az email és a jelszó. Itt igen.
 
-			if (user.getType().equals("user")) {
+			if (user.getType().equals("user")) {  // user estén
 
 				user.setLogedin(1);
 
@@ -95,7 +103,7 @@ public class LoginAndRegController {
 
 				html = "index.html";
 
-			} else {
+			} else {  // admin esetén
 
 				
 				
@@ -116,6 +124,8 @@ public class LoginAndRegController {
 		return html;
 	}
 
+	
+	//KIJELENTKEZÉS
 	@PostMapping("logout")
 	public String logout(Model model, @RequestParam(name = "userid") int userId) {
 

@@ -87,7 +87,7 @@ header{
         <th>Azonosító</th>
         <th>Modell</th>
         <th>Rendszám</th>
-        <th>Napi díj</th>
+        <th>Napidíj</th>
 
         <tr th:each="car: ${allCars}">
 
@@ -110,7 +110,7 @@ header{
         <th>Azonosító</th>
         <th>Modell</th>
         <th>Rendszám</th>
-        <th>Napi díj</th>
+        <th>Napidíj</th>
 
         <tr th:each="car: ${brokenCars}">
 
@@ -136,7 +136,7 @@ header{
       <input type = "text" name = "model"/><br>
       Rendszám:<br>
       <input type = "text" name = "plate"/><br>
-      Napi díj:<br>
+      Napidíj:<br>
       <input type = "number" name = "price"/><br>
       <input type = "submit" value = "Regisztráció"/>
 
@@ -157,18 +157,33 @@ header{
     </form><br>
     <p th:text="${delete}"></p>
   </div>
+  
+  <div class = "deleterent">     
+    <h4 class = "red">FOGLALÁS TÖRLÉSE:<h4>
+
+    <form method = "post" action = "deleterent">
+      <input type="hidden" name="userid" th:value="${user.id}">
+
+      <h4>Kérem adja meg a foglalás azonosítóját:<h4>
+      <input type = "number" name = "rentid"/><br>
+      <input type = "submit" value = "Foglalás törlése" />
+
+    </form><br>
+    <p th:text="${deleterent}"></p>
+  </div>
+  
   <div class = "report">
     
     <h4 class = "red">RIPORTOK</h4>
     
     <form action = "/report" method = "post">
 			<input type="hidden" name="userid" th:value="${user.id}">
-			<h4>Kezdő dátum:</h4><br>
+			<h4>Kezdő dátum:</h4>
 			<input class = "middle" type = "date" name = "start"/><br>
-			<h4>Vég dátum:</h4><br>
+			<h4>Vég dátum:</h4>
 			<input class = "middle" type = "date" name = "end"/><br>
 				
-			<h4>Autó:</h4><br>
+			<h4>Autó:</h4>
 			<select id= "cs" class = "middle" name = "carid">
 					<option th:value = "0" th:text = "összes"></option>
 					<option th:each= "car : ${allCars}" th:value="${car.id}" th:text="${car.id} + ' ' + ${car.model} + ' ' + ${car.plate}"></option>

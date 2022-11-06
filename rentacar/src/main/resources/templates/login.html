@@ -10,7 +10,8 @@ body{
   box-sizing: border-box;
 }
 h2{
-  padding-top: 30px;
+  
+  padding-top: 60px;
   margin-bottom: 0px;
 	text-align : center;
 }
@@ -30,10 +31,16 @@ h4{
   height: 300px;
   box-shadow: 0px 0px 7px 2px black;
 }	
-.inner{
-   display: flex;
-  justify-content: space-around; 
- } 
+.f{
+  margin-left: auto;
+  margin-right: auto;
+}
+ .middle{
+  margin-left: 215px
+}
+.middlebutton{
+  margin-left: 275px
+} 
  
  
 </style>
@@ -42,21 +49,21 @@ h4{
 <body>
 
 <div class = "container">
-	<h2>Kérlek lépj be!<h2>
+	<h2>Kérjük lépjen be!</h2><br>
 	
 	
-
+<div class = "f">
 	<form action = "/login" method = "post" >
 		<h4>Email:</h4>
-		<input type="text" name = "email"/><br>
+		<input class = "middle" type="text" name = "email"/><br><br>
 		<h4>Jelszó:</h4>
-		<input type="password" name = "pwd"/><br>
+		<input class = "middle" type="password" name = "pwd"/><br>
 		
-		<input type="submit"  value = "Login"/>
+		<input class = "middlebutton" type="submit"  value = "Login"/>
 		
 	
 	</form>
-	
+</div>
 	<p th:text="${feedback}"></p>
 </div>
 	
