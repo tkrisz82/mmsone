@@ -1,12 +1,12 @@
 # mmsone
 Sziasztok!
 
-	Nem tudom a frontend-es rész mennyire volt fontos, mivel egy backend-es pozícióról van szó, így azzal sokat nem is foglalkoztam, csak egy kis retro stílust
-  adtam neki.
+Nem tudom a frontend-es rész mennyire volt fontos, mivel egy backend-es pozícióról van szó, így azzal sokat nem is foglalkoztam, csak egy kis retro stílust
+adtam neki.
 
 Applikáció leírása:
 
-	A feladathoz három adatbázis táblát használtam:
+A feladathoz három adatbázis táblát használtam:
 
 user:
 id(int, pk), name(varchar), email(varchar), pwd(varchar), logedin(int), type(varchar-admin/user)
