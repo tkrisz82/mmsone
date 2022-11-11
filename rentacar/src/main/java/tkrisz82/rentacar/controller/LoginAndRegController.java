@@ -100,6 +100,7 @@ public class LoginAndRegController {
 				model.addAttribute("user", user);
 				
 				model.addAttribute("price", 0);
+				model.addAttribute("eur", 0);
 
 				html = "index.html";
 

@@ -1,9 +1,11 @@
 package tkrisz82.rentacar.controller;
 
+import java.io.IOException;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.jdom2.JDOMException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -18,6 +20,7 @@ import tkrisz82.rentacar.model.Car;
 import tkrisz82.rentacar.model.Rent;
 import tkrisz82.rentacar.model.User;
 import tkrisz82.rentacar.services.DateHandler;
+import tkrisz82.rentacar.services.RestHandler;
 
 @Controller
 public class AppController {
@@ -26,7 +29,7 @@ public class AppController {
 	@PostMapping("/rent")
 	public String rentACar(Model model, @RequestParam(name = "start") Date start, @RequestParam(name = "end") Date end,
 			@RequestParam(name = "userid") int userId, @RequestParam(name = "carid") int carId,
-			@RequestParam(name = "comment") String comment) {
+			@RequestParam(name = "comment") String comment) throws JDOMException, IOException {
 
 		String html = "";
 
@@ -39,27 +42,29 @@ public class AppController {
 		RentDB rdb = new RentDB();
 
 		if (user.getLogedin() == 1) { // A user belépett-e?
-			
-			if(start.compareTo(end) == 1) {  // Ha a kezdeti dátum a vég dátum után van
-				
+
+			if (start.compareTo(end) == 1) { // Ha a kezdeti dátum a vég dátum után van
+
 				model.addAttribute("succsess", "A vég dátum a kezdő előtt van!");
 				model.addAttribute("user", user);
+				model.addAttribute("price", 0);
+				model.addAttribute("eur", 0);
 				model.addAttribute("carList", cdb.getAllNotBrokenCars());
 				html = "index.html";
-			}
-			else { // Ha jó a dátum
+			} else { // Ha jó a dátum
 
 				if (car.getBroken() == 0) { // Az autó törött-e?
-	
+
 					List<Rent> rentList = rdb.getRentByCarId(carId);
-	
+
 					boolean rentable = true;
-	
+
 					if (!rentList.isEmpty()) { // Foglalat-e az autó az adott időpontban?
-	
+
 						for (int i = 0; i < rentList.size(); i++) {
 							Rent rent = rentList.get(i);
-							if ((start.compareTo(rent.getStartDate()) >= 0 && start.compareTo(rent.getFinishDate()) <= 0)
+							if ((start.compareTo(rent.getStartDate()) >= 0
+									&& start.compareTo(rent.getFinishDate()) <= 0)
 									|| (end.compareTo(rent.getStartDate()) >= 0
 											&& end.compareTo(rent.getFinishDate()) <= 0)) {
 								rentable = false;
@@ -69,40 +74,50 @@ public class AppController {
 					}
 					// Ha az autó nem foglalt
 					if (rentList.isEmpty() || rentable == true) {
-	
+
 						DateHandler dh = new DateHandler();
-	
+
 						Rent rent = new Rent();
-	
+
 						rent.setCarId(carId);
 						rent.setId(0);
 						rent.setStartDate(start);
 						rent.setFinishDate(end);
 						rent.setUserId(userId);
 						rent.setComment(comment);
-	
+
 						rdb.saveRent(rent);
-	
+
+						RestHandler rh = new RestHandler();
+						Double eur = rh.getCurrentRate();
+
 						long price = dh.getDateDiffPlusOne(start, end) * car.getPrice();
-	
+
+						Double eurPrice = Math.ceil(price / eur);
+
 						model.addAttribute("succsess", "Sikeres foglalás!");
 						model.addAttribute("price", price);
+						model.addAttribute("eur", eurPrice);
 						model.addAttribute("carList", cdb.getAllNotBrokenCars());
 						model.addAttribute("user", user);
-	
+
 						html = "index.html";
 					} else {
 						model.addAttribute("succsess", "Az autó az adott időintervallumban nem elérhető.");
 						model.addAttribute("user", user);
+						model.addAttribute("price", 0);
+						model.addAttribute("eur", 0);
 						model.addAttribute("carList", cdb.getAllNotBrokenCars());
 						html = "index.html";
 					}
-	
+
 				} else {
 					model.addAttribute("succsess", "Az autó jelenleg törött!");
+					model.addAttribute("price", 0);
+					model.addAttribute("eur", 0);
 					model.addAttribute("carList", cdb.getAllNotBrokenCars());
 					model.addAttribute("user", user);
-	
+
 					html = "index.html";
 				}
 			}
@@ -110,8 +125,7 @@ public class AppController {
 		} else {
 			html = "welcome.html";
 		}
-		
-		
+
 		return html;
 	}
 
@@ -141,6 +155,8 @@ public class AppController {
 
 				model.addAttribute("price", 0);
 
+				model.addAttribute("eur", 0);
+
 				model.addAttribute("damage", "Köszönjük az értesítést, kollégánk hamarosan hívni fogja!");
 
 				html = "index.html";
@@ -150,6 +166,8 @@ public class AppController {
 				model.addAttribute("user", user);
 
 				model.addAttribute("price", 0);
+
+				model.addAttribute("eur", 0);
 
 				model.addAttribute("damage",
 						"Nem megfelelő a rendszám formátuma, vagy nincs ilyen rendszámú jármű a flottánkban.");
@@ -190,6 +208,8 @@ public class AppController {
 
 				model.addAttribute("price", 0);
 
+				model.addAttribute("eur", 0);
+
 				model.addAttribute("repaired", "Köszönjük az értesítést, kollégánk hamarosan hívni fogja!");
 
 				html = "index.html";
@@ -199,6 +219,8 @@ public class AppController {
 				model.addAttribute("user", user);
 
 				model.addAttribute("price", 0);
+
+				model.addAttribute("eur", 0);
 
 				model.addAttribute("repaired",
 						"Nem megfelelő a rendszám formátuma, vagy nincs ilyen rendszámú jármű a flottánkban.");
