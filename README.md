@@ -40,6 +40,6 @@ is törölni. Autó törlés esetén az adott autó összes foglalását is tör
 A foglaló oldalon, az index.html-en először táblázatban foglalva lehet látni az aktuálisan ép autókat, amelyekre foglalást lehet leadni. Foglalás esetén a dátumok és az autó kiválasztása után a foglalás gombra kattintva -ha az autó nem foglalt az adott időintervallumban- akkor kiírja, hogy „Sikeres foglalás” és a foglalás árát. Az árat feltünteti Euro-ban is. Ezt a napiarfolyam.hu oldalról az adott napi MNB középárfolyam alapján számolja ki. Sikertelen foglalás esetén is ad tájékoztatást, hogy mi volt a probléma.
 Ezen az oldalon lehet rendszám megadásával kárt, illetve javítást bejelenteni. Az autó további foglalásait nem töröltem az adatbázisból kár bejelentés esetén. Ha az autó nem készül el az admin tudja törölni a foglalásokat, illetve magát az autót is.
 
-Mivel a funkciókat használni csak bejelentkezett user tudja, ezért található az oldlon egy Logout gomb is a kijelentkezéshez.
+Mivel a funkciókat használni csak bejelentkezett user tudja, ezért található az oldalon egy Logout gomb is a kijelentkezéshez.
 
 
