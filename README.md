@@ -2,7 +2,7 @@
 
 
 
-Felhasznált technológiák, speciális funkciók: Java, Spring Boot, MySQL, Hibernate, REST, XML, Password hash, Exception kezelés, HTML, CSS 
+Felhasznált technológiák, speciális funkciók: Java, Spring Boot, MySQL, Hibernate, AWS, REST, XML, Password hash, Exception kezelés, HTML, CSS 
 
 
 
@@ -13,6 +13,8 @@ A forntend nagyon minimál retro stílusban készült. Nem az volt a fő priorit
 Ez egy alap autókölcsönző alkalmazás. Nagyon egyszerűen megfogalmazva, csak regisztrált, belépett felhasználó kölcsönözhet adott időpontban szabad, nem törött autót. Adminként bejelentkezve egyéb funkciók is elérhetők: riport, törlés...
 
 Az alkalmazás és a fukciók részletesebb leírása lentebb található.
+
+Az adatbázis AWS-en keresztül érhető el, így néha kicsit gondolkodós.
 
 Három táblát használtam, melyek a rentacardb adatbázisban találhatók:
 
