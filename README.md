@@ -10,7 +10,7 @@ Applikáció leírása:
 
 A forntend nagyon minimál retro stílusban készült. Nem az volt a fő prioritás.
 
-Ez egy alap autókölcsönző alkalmazás. Nagyon egyszerűen megfogalmazva, csak regisztrált, belépett felhasználó kölcsönözhet adott időpontban szabad, nem törött autót. Adminként bejelentkezve egyéb funkciók is elérhetők: riport, törlés...
+Ez egy alap autókölcsönző alkalmazás. Nagyon egyszerűen megfogalmazva, csak regisztrált, belépett felhasználó kölcsönözhet adott időpontban szabad, nem törött autót. Adminként bejelentkezve egyéb funkciók is elérhetők: riport, törlés... 
 
 Az alkalmazás és a fukciók részletesebb leírása lentebb található.
 
@@ -30,7 +30,7 @@ id(int, pk), startdate(date), finishdate(date), userid(int, foreign key), carid(
 
 
 
-localhost:8080/rentacar címen indul az applikáció
+localhost:8080/rentacar címen indul az applikáció       (admin bejelentkezés: email: admin@admin.com, jelszó: admin)
 
 Először egy üdvözlő oldal jelenik meg, ahol ki lehet választani, hogy regisztrálni, vagy belépni akar-e a user. Regisztráció esetén egy regisztráló oldalra visz, 
 ahol  nevet, email-t, jelszót kell megadni. A jelszót hash-elve menti az adatbázisba. Regisztráció után jön a belépés. Ha a felhasználó admin, akkor az admin.html-re 
