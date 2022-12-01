@@ -33,7 +33,7 @@ id(int, pk), startdate(date), finishdate(date), userid(int, foreign key), carid(
 localhost:8080/rentacar címen indul az applikáció       (admin bejelentkezés: email: admin@admin.com, jelszó: admin)
 
 Először egy üdvözlő oldal jelenik meg, ahol ki lehet választani, hogy regisztrálni, vagy belépni akar-e a user. Regisztráció esetén egy regisztráló oldalra visz, 
-ahol  nevet, email-t, jelszót kell megadni. A jelszót hash-elve menti az adatbázisba. Regisztráció után jön a belépés. Ha a felhasználó admin, akkor az admin.html-re 
+ahol  nevet, email-t, jelszót kell megadni. Ellenőrzi a megfelelő email formátumot és a jelszót hash-elve menti az adatbázisba. Regisztráció után jön a belépés. Ha a felhasználó admin, akkor az admin.html-re 
 viszi, ha user, akkor az index.html-re, ahol foglalni lehet.
 
 Az admin látja egy táblázatban a flotta összes autóját, külön táblázatban a törött autókat, tud autót hozzáadni az adatbázishoz és onnan törölni, illetve foglalást
