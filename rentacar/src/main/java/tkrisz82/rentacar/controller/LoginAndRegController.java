@@ -43,24 +43,37 @@ public class LoginAndRegController {
 	public String registration(Model model, @RequestParam(name = "name") String name,
 			@RequestParam(name = "email") String email, @RequestParam(name = "pwd") String pwd) {
 		
+		String html = "";
+		
 		PwdHandler ph = new PwdHandler();
 		
-		String hashedpwd = ph.hashPassword(pwd);
+		if(!ph.validate(email)) {
+			model.addAttribute("feedback", "Rossz email formátum!");
+			
+			html = "registration.html";
+		}
+		else {
 		
-		User user = new User();
+			String hashedpwd = ph.hashPassword(pwd);
+			
+			User user = new User();
+	
+			user.setId(0);
+			user.setName(name);
+			user.setEmail(email);
+			user.setPwd(hashedpwd);
+			user.setLogedin(0);
+			user.setType("user");
+	
+			UserDB db = new UserDB();
+	
+			db.saveUser(user);
+			
+			html = "login.html";
 
-		user.setId(0);
-		user.setName(name);
-		user.setEmail(email);
-		user.setPwd(hashedpwd);
-		user.setLogedin(0);
-		user.setType("user");
-
-		UserDB db = new UserDB();
-
-		db.saveUser(user);
-
-		return "login.html";
+		}
+		
+		return html;
 	}
 	
 	
